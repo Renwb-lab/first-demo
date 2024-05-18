@@ -7,4 +7,28 @@
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user (name, email) VALUES (#{name}, #{email})
     </insert>
+
+    <select id="selectById" resultType="com.first.demo.model.User">
+        SELECT id, name, email FROM user WHERE id = #{id}
+    </select>
+
+    <select id="selectByNameLikeOrId" resultType="com.first.demo.model.User">
+        SELECT * FROM user
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                AND name LIKE CONCAT('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectFriendsById" resultType="com.first.demo.model.User">
+        SELECT user.* FROM user join friend on user.id = friend.friend_id where friend.user_id = #{id}
+    </select>
+
+    <select id="selectFriendCountById" resultType="int">
+        SELECT count(*) FROM user join friend on user.id = friend.friend_id where friend.user_id = #{id}
+    </select>
 </mapper>

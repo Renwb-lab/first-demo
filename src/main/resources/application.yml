@@ -46,7 +46,6 @@ spring:
           # 合并多个连接池的监控数据，默认false
           merge-sql: false
 
-
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml
   type-aliases-package: com.first.demo.model
@@ -54,4 +53,5 @@ mybatis-plus:
 logging:
   level:
     root: WARN
-    org.springframework.web: DEBUG
+    com.baomidou: DEBUG
+    com.first.demo.mapper: DEBUG
